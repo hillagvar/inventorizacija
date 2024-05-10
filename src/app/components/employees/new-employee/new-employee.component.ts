@@ -21,7 +21,7 @@ export class NewEmployeeComponent {
     console.log(f.form.value);
 
     this.employeeService.addEmployee(f.form.value).subscribe(() => {
-
+      f.reset();
     });
 
   }

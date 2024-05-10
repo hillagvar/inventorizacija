@@ -8,14 +8,14 @@
                 <div class="mb-3 row">
                     <label for="" class="col-sm-2 col-form-label text-end">Vardas:</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" id="" class="form-control" [class.is-invalid]="!inputName.valid &&inputName.touched" ngModel required minlength="2" maxlength="32" pattern="[a-zA-Z ]*" #inputName="ngModel">
+                        <input type="text" name="name" id="" class="form-control" [class.is-invalid]="!inputName.valid &&inputName.touched" ngModel required minlength="2" maxlength="32" pattern="[Ą-Ž\w\ ]*" #inputName="ngModel">
                         <div class="helper-block" *ngIf="!inputName.valid && inputName.touched">Vardas turi būti 2-32 raidžių ilgio.</div>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="" class="col-sm-2 col-form-label text-end">Pavardė:</label>
                     <div class="col-sm-10">
-                        <input type="text" name="surname" id="" class="form-control" [class.is-invalid]="!inputSurname.valid && inputSurname.touched" ngModel required minlength="2" maxlength="32" pattern="[a-zA-Z ]*" #inputSurname="ngModel">
+                        <input type="text" name="surname" id="" class="form-control" [class.is-invalid]="!inputSurname.valid && inputSurname.touched" ngModel required minlength="2" maxlength="32" pattern="[Ą-Ž\w\ ]*" #inputSurname="ngModel">
                         <div class="helper-block" *ngIf="!inputSurname.valid && inputSurname.touched">Pavardė turi būti 2-32 raidžių ilgio.</div>
                     </div>
                 </div>
