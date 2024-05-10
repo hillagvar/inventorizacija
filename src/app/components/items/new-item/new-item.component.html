@@ -1,0 +1,78 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            Pridėti naują daiktą
+        </div>
+        <div class="card-body">
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Inventorizacijos numeris:</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" formControlName="invNumber" [class.is-invalid]="!itemForm.get('invNumber')?.valid && itemForm.get('invNumber')?.touched">
+                        <div class="helper-block" *ngIf="!itemForm.get('invNumber')?.valid && itemForm.get('invNumber')?.touched">
+                            Inventorizacijos numeris yra privalomas ir netrumpesnis nei 3 simboliai.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Pavadinimas:</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" formControlName="name">
+                        <div class="helper-block"></div>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Tipas:</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" formControlName="type">
+                            <option value="trumpalaikis">Trumpalaikis</option>
+                            <option value="ilgalaikis">Ilgalaikis</option>
+                        </select>
+                        <div class="helper-block">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Atsakingas darbuotojas:</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" formControlName="responsibleEmployeeId">
+                            <option></option>
+                            <option></option>
+                        </select>
+                        <div class="helper-block">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-3 col-form-label text-end">Lokacijos:</label>
+                    <div class="col-sm-9">
+                        <div class="row" formArrayName="locations">
+                            <div class="col-sm-12 mb-3" *ngFor="let location of locations; let i = index">
+                                <input type="text" class="form-control" [formControlName]="i">
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-secondary me-3" (click)="addLocationField()">Pridėti papildomą lokaciją</button>
+                            <button type="button" class="btn btn-secondary" (click)="removeLocationField()">Pašalinti papildomą lokaciją</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-sm-3 offset-sm-3">
+                        <button class="btn btn-success" [disabled]="!itemForm.valid">Pridėti</button>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
