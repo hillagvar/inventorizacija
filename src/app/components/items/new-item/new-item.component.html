@@ -10,15 +10,17 @@
                     <div class="col-sm-9">
                         <input class="form-control" formControlName="invNumber" [class.is-invalid]="!itemForm.get('invNumber')?.valid && itemForm.get('invNumber')?.touched">
                         <div class="helper-block" *ngIf="!itemForm.get('invNumber')?.valid && itemForm.get('invNumber')?.touched">
-                            Inventorizacijos numeris yra privalomas ir netrumpesnis nei 3 simboliai.
+                            Inventorizacijos numeris yra privalomas, šablonas AAA00000.
                         </div>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="" class="col-sm-3 col-form-label text-end">Pavadinimas:</label>
                     <div class="col-sm-9">
-                        <input class="form-control" formControlName="name">
-                        <div class="helper-block"></div>
+                        <input class="form-control" formControlName="name" [class.is-invalid]="!itemForm.get('name')?.valid && itemForm.get('name')?.touched">
+                        <div class="helper-block" *ngIf="!itemForm.get('name')?.valid && itemForm.get('name')?.touched">
+                            Pavadinimas yra privalomas ir turi būti ne trumpesnis nei 3 simboliai.
+                        </div>
                     </div>
                 </div>
 
@@ -30,29 +32,33 @@
                             <option value="ilgalaikis">Ilgalaikis</option>
                         </select>
                         <div class="helper-block">
-
                         </div>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="" class="col-sm-3 col-form-label text-end">Atsakingas darbuotojas:</label>
                     <div class="col-sm-9">
-                        <select class="form-control" formControlName="responsibleEmployeeId">
-                            <option></option>
-                            <option></option>
-                        </select>
-                        <div class="helper-block">
+                        <select class="form-control" formControlName="responsibleEmployeeId" [class.is-invalid]="!itemForm.get('responsibleEmployeeId')?.valid && itemForm.get('responsibleEmployeeId')?.touched">
+                            <option *ngFor=" let employee of employeeList" value="{{employee.id}}">{{employee.name}} {{employee.surname}}</option>
 
+                        </select>
+                        <div class="helper-block" *ngIf="!itemForm.get('responsibleEmployeeId')?.valid && itemForm.get('responsibleEmployeeId')?.touched">
+                            Atsakingas darbuotojas yra privalomas.
                         </div>
                     </div>
                 </div>
+
+
 
                 <div class="mb-3 row">
                     <label for="" class="col-sm-3 col-form-label text-end">Lokacijos:</label>
                     <div class="col-sm-9">
                         <div class="row" formArrayName="locations">
                             <div class="col-sm-12 mb-3" *ngFor="let location of locations; let i = index">
-                                <input type="text" class="form-control" [formControlName]="i">
+                                <input type="text" class="form-control" [formControlName]="i" [class.is-invalid]="!location.valid && location.touched">
+                                <div class="helper-block" *ngIf="!location.valid && location.touched">
+                                    Lokacija yra privaloma ir turi būti ne trumpesnė nei 3 simboliai.
+                                </div>
                             </div>
 
                         </div>

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ItemService } from '../../../services/item.service';
+import { Employee } from '../../../models/employee';
+import { EmployeeService } from '../../../services/employee.service';
 
 @Component({
   selector: 'app-new-item',
@@ -12,23 +14,29 @@ import { ItemService } from '../../../services/item.service';
 })
 export class NewItemComponent {
 
+  public employeeList: Employee[] = [];
+
   public itemForm: FormGroup;
 
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService, private employeeService: EmployeeService) {
     this.itemForm = new FormGroup({
     "invNumber": new FormControl(null, [Validators.required, Validators.minLength(3), this.validateInvNumber]),
-    "name": new FormControl("asf", Validators.required),
+    "name": new FormControl(null, [Validators.required, Validators.minLength(3)]),
     "type": new FormControl(null),
-    "responsibleEmployeeId": new FormControl(null),
+    "responsibleEmployeeId": new FormControl(null, Validators.required),
     //masyvas is html input elementu
-    "locations": new FormArray([]),
+    "locations": new FormArray([
+      new FormControl(null, [Validators.required, Validators.minLength(3)])
+    ]),
     });
-  }
+
+    this.loadEmployees();
+  };
 
   public onSubmit() {
     console.log(this.itemForm.value);
     this.itemService.addItem(this.itemForm.value).subscribe(()=> {
- this.itemForm.reset();
+      this.itemForm.reset();
     })
   }
 
@@ -49,7 +57,7 @@ export class NewItemComponent {
 //prideti naujam laukeliui
   public addLocationField() {
     //sukuriamas naujas laukelis
-    const field= new FormControl(null, Validators.required);
+    const field= new FormControl(null, [Validators.required, Validators.minLength(3)]);
     //laukelis ikeliamas i laukeliu masyva
     (this.itemForm.get("locations") as FormArray).push(field);
   }
@@ -57,6 +65,12 @@ export class NewItemComponent {
   public removeLocationField() {
     (this.itemForm.get("locations") as FormArray).removeAt(-1)
 
+  }
+
+  private loadEmployees() {
+    this.employeeService.loadEmployees().subscribe((data) => {
+    this.employeeList = this.employeeService.employees;
+    })
   }
 
 }
