@@ -18,7 +18,7 @@ export class NewEmployeeComponent {
   }
 
   public newEmployeeSubmit(f: NgForm) {
-    console.log(f.form.value);
+    console.log(f.form);
 
     this.employeeService.addEmployee(f.form.value).subscribe(() => {
       f.reset();

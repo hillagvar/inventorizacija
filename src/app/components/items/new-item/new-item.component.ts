@@ -68,7 +68,7 @@ export class NewItemComponent {
   }
 
   private loadEmployees() {
-    this.employeeService.loadEmployees().subscribe((data) => {
+    this.employeeService.loadEmployees().subscribe(() => {
     this.employeeList = this.employeeService.employees;
     })
   }
