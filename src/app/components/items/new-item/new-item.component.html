@@ -40,15 +40,12 @@
                     <div class="col-sm-9">
                         <select class="form-control" formControlName="responsibleEmployeeId" [class.is-invalid]="!itemForm.get('responsibleEmployeeId')?.valid && itemForm.get('responsibleEmployeeId')?.touched">
                             <option *ngFor=" let employee of employeeList" value="{{employee.id}}">{{employee.name}} {{employee.surname}}</option>
-
                         </select>
                         <div class="helper-block" *ngIf="!itemForm.get('responsibleEmployeeId')?.valid && itemForm.get('responsibleEmployeeId')?.touched">
                             Atsakingas darbuotojas yra privalomas.
                         </div>
                     </div>
                 </div>
-
-
 
                 <div class="mb-3 row">
                     <label for="" class="col-sm-3 col-form-label text-end">Lokacijos:</label>
